@@ -13,8 +13,14 @@ import { DocumentMeta } from './core/api.service';
 })
 export class App {
   documents: DocumentMeta[] = [];
+  activeTab: 'documents' | 'chat' = 'documents';
 
   onDocumentsUpdated(docs: DocumentMeta[]) {
     this.documents = [...docs];
+    if (docs.length > 0) this.activeTab = 'chat';
+  }
+
+  switchTab(tab: 'documents' | 'chat') {
+    this.activeTab = tab;
   }
 }

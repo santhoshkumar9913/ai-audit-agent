@@ -1,13 +1,33 @@
 <div class="app-layout">
   <header class="app-header">
     <h1>AI Audit Agent</h1>
-    <span class="subtitle">Upload documents · Ask questions · Generate findings</span>
+    <span class="subtitle">Upload · Ask · Find</span>
   </header>
+
+  <!-- Mobile tab nav -->
+  <nav class="tab-nav">
+    <button
+      class="tab-btn"
+      [class.active]="activeTab === 'documents'"
+      (click)="switchTab('documents')"
+    >
+      Documents
+      <span class="tab-badge" *ngIf="documents.length">{{ documents.length }}</span>
+    </button>
+    <button
+      class="tab-btn"
+      [class.active]="activeTab === 'chat'"
+      (click)="switchTab('chat')"
+    >
+      Chat
+    </button>
+  </nav>
+
   <main class="app-main">
-    <aside class="sidebar">
+    <aside class="sidebar" [class.tab-hidden]="activeTab !== 'documents'">
       <app-upload (uploaded)="onDocumentsUpdated($event)" />
     </aside>
-    <section class="chat-area">
+    <section class="chat-area" [class.tab-hidden]="activeTab !== 'chat'">
       <app-chat [documents]="documents" />
     </section>
   </main>

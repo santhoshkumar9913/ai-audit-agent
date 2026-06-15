@@ -35,7 +35,7 @@ export interface ChatResponse {
 
 @Injectable({ providedIn: 'root' })
 export class ApiService {
-  private base = 'http://localhost:8000/api/v1';
+  private base = '/api/v1';
 
   constructor(private http: HttpClient) {}
 
