@@ -1,0 +1,56 @@
+<div class="chat-panel">
+  <div class="chat-header">
+    <h2>Audit Assistant</h2>
+    <div class="header-actions">
+      <span class="doc-badge" *ngIf="documents.length">
+        {{ documents.length }} doc{{ documents.length !== 1 ? 's' : '' }} loaded
+      </span>
+      <button class="btn-clear" (click)="clearChat()" *ngIf="messages.length" title="Clear chat">↺ Clear</button>
+    </div>
+  </div>
+
+  <div class="messages">
+    <div *ngIf="!messages.length && !loading" class="empty-state">
+      <p>Upload documents, then ask questions like:</p>
+      <ul>
+        <li>"List the sheets in this Excel file"</li>
+        <li>"Find all invoices with status Pending"</li>
+        <li>"Generate an audit finding for the procurement control weakness"</li>
+        <li>"Summarise the evidence in the PDF"</li>
+      </ul>
+    </div>
+
+    <div
+      *ngFor="let msg of messages"
+      class="message"
+      [class.user]="msg.role === 'user'"
+      [class.assistant]="msg.role === 'assistant'"
+    >
+      <div class="bubble" [innerHTML]="formatContent(msg.content)"></div>
+      <span class="ts">{{ msg.timestamp | date: 'HH:mm' }}</span>
+    </div>
+
+    <div *ngIf="loading" class="message assistant">
+      <div class="bubble typing">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+
+    <div #messagesEnd></div>
+  </div>
+
+  <p class="error" *ngIf="error">{{ error }}</p>
+
+  <div class="input-row">
+    <textarea
+      [(ngModel)]="inputText"
+      (keydown)="onKeyDown($event)"
+      placeholder="Ask about your documents… (Enter to send, Shift+Enter for new line)"
+      rows="2"
+      [disabled]="loading"
+    ></textarea>
+    <button class="btn-send" (click)="send()" [disabled]="!inputText.trim() || loading">
+      Send
+    </button>
+  </div>
+</div>

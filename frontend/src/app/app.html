@@ -1,0 +1,14 @@
+<div class="app-layout">
+  <header class="app-header">
+    <h1>AI Audit Agent</h1>
+    <span class="subtitle">Upload documents · Ask questions · Generate findings</span>
+  </header>
+  <main class="app-main">
+    <aside class="sidebar">
+      <app-upload (uploaded)="onDocumentsUpdated($event)" />
+    </aside>
+    <section class="chat-area">
+      <app-chat [documents]="documents" />
+    </section>
+  </main>
+</div>

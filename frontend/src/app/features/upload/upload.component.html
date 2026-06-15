@@ -1,0 +1,37 @@
+<div class="upload-panel">
+  <h2>Documents</h2>
+
+  <div
+    class="drop-zone"
+    [class.drag-over]="dragOver"
+    (dragover)="onDragOver($event)"
+    (dragleave)="onDragLeave()"
+    (drop)="onDrop($event)"
+  >
+    <span *ngIf="!uploading">Drag &amp; drop Excel or PDF files here</span>
+    <span *ngIf="uploading" class="spinner">Uploading…</span>
+    <label class="btn-upload">
+      Browse
+      <input type="file" multiple accept=".xlsx,.xls,.pdf" (change)="onFileSelect($event)" hidden />
+    </label>
+  </div>
+
+  <p class="error" *ngIf="error">{{ error }}</p>
+
+  <ul class="doc-list" *ngIf="documents.length">
+    <li *ngFor="let doc of documents" class="doc-item">
+      <span class="doc-icon">{{ doc.file_type === 'excel' ? '📊' : '📄' }}</span>
+      <div class="doc-info">
+        <span class="doc-name">{{ doc.filename }}</span>
+        <span class="doc-meta">
+          {{ doc.file_type | uppercase }}
+          <ng-container *ngIf="doc.sheet_names?.length"> · {{ doc.sheet_names!.length }} sheets</ng-container>
+          <ng-container *ngIf="doc.size_bytes"> · {{ formatSize(doc.size_bytes) }}</ng-container>
+        </span>
+      </div>
+      <button class="btn-delete" (click)="deleteDoc(doc.id)" title="Remove">✕</button>
+    </li>
+  </ul>
+
+  <p class="empty" *ngIf="!documents.length && !uploading">No documents uploaded yet.</p>
+</div>

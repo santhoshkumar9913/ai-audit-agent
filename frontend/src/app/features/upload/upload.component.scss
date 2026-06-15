@@ -1,0 +1,128 @@
+.upload-panel {
+  padding: 1.5rem;
+  background: #1e1e2e;
+  border-radius: 12px;
+  color: #cdd6f4;
+
+  h2 {
+    margin: 0 0 1rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+}
+
+.drop-zone {
+  border: 2px dashed #45475a;
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-align: center;
+  cursor: default;
+  transition: border-color 0.2s, background 0.2s;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  align-items: center;
+  color: #a6adc8;
+  font-size: 0.9rem;
+
+  &.drag-over {
+    border-color: #89b4fa;
+    background: rgba(137, 180, 250, 0.05);
+  }
+}
+
+.btn-upload {
+  background: #89b4fa;
+  color: #1e1e2e;
+  border: none;
+  padding: 0.4rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.85rem;
+
+  &:hover {
+    background: #74c7ec;
+  }
+}
+
+.spinner {
+  color: #89b4fa;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.error {
+  color: #f38ba8;
+  font-size: 0.85rem;
+  margin: 0.5rem 0 0;
+}
+
+.doc-list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.doc-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: #313244;
+  padding: 0.6rem 0.75rem;
+  border-radius: 8px;
+}
+
+.doc-icon {
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.doc-info {
+  flex: 1;
+  overflow: hidden;
+
+  .doc-name {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .doc-meta {
+    font-size: 0.75rem;
+    color: #a6adc8;
+  }
+}
+
+.btn-delete {
+  background: none;
+  border: none;
+  color: #6c7086;
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  flex-shrink: 0;
+
+  &:hover {
+    color: #f38ba8;
+    background: rgba(243, 139, 168, 0.1);
+  }
+}
+
+.empty {
+  text-align: center;
+  color: #6c7086;
+  font-size: 0.85rem;
+  margin-top: 1rem;
+}
